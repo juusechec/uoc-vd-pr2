@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+    <title>Food Waste — Jorge Useche</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="description" content="A big climate problem we can actually solve">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="author" content="Jorge Useche">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="stylesheet" href="food_waste_files/style.css">
+    <link rel="stylesheet" href="assets/style.css">
+
+    <script src="//d3js.org/d3.v3.min.js"></script>
+
+</head>
+
+<body>
+    <a class="iib-skip-content screen-reader-text" href="#primary">Skip to content</a>
+    <div id="iib-page" class="iib-base has-banner--top has-banner--bottom">
+        <header id="iib-masthead" class="iib-site-header"> </header>
+        <section role="banner" class="iib-page-promo iib-page-promo--top iib-promo--7469">
+            <div class="iib-promo--content">
+                <div class="iib-w">
+                    <div><strong class="iib-promo--new">New!</strong> OK</div>
+                </div>
+            </div>
+        </section>
+        <section role="main" id="primary" class="site-main">
+            <div class="page">
+                <div class="section">
+                    <h1>Food Waste per Country Yearly</h1>
+                </div>
+                <div class="section-separator"></div>
+                <div class="section">
+                    <label for="year">Year:</label>
+                    <select name="year" id="year" class="button-22">
+                        <option value="">All</option>
+                        <option value="2004">2004</option>
+                        <option value="2005">2005</option>
+                        <option value="2006">2006</option>
+                        <option value="2007">2007</option>
+                        <option value="2008">2008</option>
+                        <option value="2009">2009</option>
+                        <option value="2010">2010</option>
+                        <option value="2011">2011</option>
+                        <option value="2012">2012</option>
+                        <option value="2013">2013</option>
+                        <option value="2014">2014</option>
+                        <option value="2015">2015</option>
+                        <option value="2016">2016</option>
+                        <option value="2017">2017</option>
+                        <option value="2018">2018</option>
+                        <option value="2019">2019</option>
+                    </select>
+
+                    <label for="sectoral_information">Sectoral Information:</label>
+                    <select name="sectoral_information" id="sectoral_information" class="button-22">
+                        <option value="">All</option>
+                        <option value="Household">Household</option>
+                        <option value="Food_Service">Food_Service</option>
+                        <option value="Retail">Retail</option>
+                    </select>
+
+                    <label for="log">Log:</label>
+                    <select name="log" id="log" class="button-22">
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                    </select>
+
+                    <label for="method">Mass size:</label>
+                    <select name="method" id="method" class="button-22">
+                        <option value="per-capita">Per capita (tons by person)</option>
+                        <option value="">No</option>
+                    </select>
+
+                    <label for="region">Region:</label>
+                    <select name="region" id="region" class="button-22">
+                        <option value="">All</option>
+                        <option value="Australia and New Zealand">Australia and New Zealand</option>
+                        <option value="Western Europe">Western Europe</option>
+                        <option value="Northern Europe">Northern Europe</option>
+                        <option value="Southern Europe">Southern Europe</option>
+                        <option value="Western Asia">Western Asia</option>
+                        <option value="Southern Asia">Southern Asia</option>
+                        <option value="Latin America and the Caribbean">Latin America and the Caribbean</option>
+                        <option value="Northern America">Northern America</option>
+                        <option value="Eastern Asia">Eastern Asia</option>
+                        <option value="Sub-Saharan Africa">Sub-Saharan Africa</option>
+                        <option value="Eastern Europe">Eastern Europe</option>
+                        <option value="South-eastern Asia">South-eastern Asia</option>
+                    </select>
+
+                    <button class="button-22" role="button" onclick="redraw()">Redraw</button>
+
+                    <div class="container-center">
+                        <svg id="food-waste" width="1024" height="500"></svg>
+                        <div id="tooltip"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="iib-page-viz iib-single-viz iib-single-viz--no-title">
+                <div class="iib-viz-content--wrapper">
+                    <div class="iib-viz-section iib-viz-wrapper iib-viz-wrapper-static">
+                        <div class="iib-w">
+                            <div class="iib-viz-image iib-static-viz-image iib-img-loaded"> <img
+                                    src="food_waste_files/IIB-Food-Waste-IIB-1276x2-1.png" alt=""
+                                    data-default="https://infobeautiful4.s3.amazonaws.com/2021/11/IIB-Food-Waste-IIB-1276x2-1.png"
+                                    data-small="https://infobeautiful4.s3.amazonaws.com/2021/11/Food-Waste-IIB-mobile@2x-1.png"
+                                    data-clickthrough="https://infobeautiful4.s3.amazonaws.com/2021/11/IIB-Food-Waste-IIB-1276x2-1.png">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <footer class="iib-footer">
+            <div class="iib-footer--lower">
+                <div class="iib-w">
+                    <div class="iib-footer--small">
+                        <div class="iib-logo"><img alt="Jorge Useche" class="iib-logo--text"
+                                src="food_waste_files/information-is-beautiful-logo-text-light.svg">
+                        </div>
+                        <div class="iib-legal">© 2022</div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <script src="assets/script1.js"></script>
+    <!-- <script src="assets/script2.js"></script> -->
+</body>
+
+</html>

@@ -1,0 +1,134 @@
+:root {
+  --cw-bd: #455ca8;
+  --cw-bl: #587cf5;
+  --cw-y: #f5ea4c;
+  --cw-pd: #9523a8;
+  --cw-pl: #db40f5;
+  --g-w: #eee;
+}
+
+*,
+:after,
+:before {
+  -webkit-box-sizing: inherit;
+  box-sizing: inherit;
+}
+
+body,
+html {
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  height: 100%;
+  background: #2a2a2e;
+}
+
+body {
+  width: 100%;
+  max-width: 2600px;
+  min-width: 320px;
+  margin: auto;
+}
+
+body {
+  font-family: sans-serif;
+}
+
+h1 {
+  margin: 0;
+}
+
+.iib-promo--content {
+  color: var(--cw-bl);
+}
+
+.page {
+  background-color: var(--cw-bd);
+  color: var(--g-w);
+  font-family: "Quicksand";
+}
+
+.section-separator {
+  border-top: 1px dotted var(--g-w);
+  width: calc(100% - 50px);
+  margin: 0 auto;
+}
+
+.section {
+  width: calc(100% - 50px);
+  margin: 0 auto;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.container-center {
+  display: flex;
+  justify-content: center;
+}
+
+.tooltip {
+  position: absolute;
+  z-index: 1070;
+  display: none;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol";
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.5;
+  text-align: left;
+  text-align: start;
+  text-decoration: none;
+  text-shadow: none;
+  text-transform: none;
+  letter-spacing: normal;
+  word-break: normal;
+  word-spacing: normal;
+  white-space: normal;
+  line-break: auto;
+  font-size: 0.875rem;
+  word-wrap: break-word;
+  /* opacity: 0; */
+}
+
+.button-22 {
+  align-items: center;
+  appearance: button;
+  background-color: var(--cw-pd);
+  border-radius: 8px;
+  border-style: none;
+  box-shadow: rgba(255, 255, 255, 0.26) 0 1px 2px inset;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  /* display: flex;
+  flex-direction: row;
+  flex-shrink: 0; */
+  font-family: "RM Neue", sans-serif;
+  font-size: 100%;
+  line-height: 1.15;
+  margin: 0;
+  padding: 10px 21px;
+  text-align: center;
+  text-transform: none;
+  transition: color 0.13s ease-in-out, background 0.13s ease-in-out,
+    opacity 0.13s ease-in-out, box-shadow 0.13s ease-in-out;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.button-22:active {
+  background-color: var(--cw-pl);
+}
+
+.button-22:hover {
+  background-color: var(--cw-pl);
+}
