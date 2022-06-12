@@ -68,31 +68,31 @@
 
                     <label for="log">Log:</label>
                     <select name="log" id="log" class="button-22">
-                        <option value="Yes">Yes</option>
                         <option value="No">No</option>
+                        <option value="Yes">Yes</option>
                     </select>
 
-                    <label for="method">Mass size:</label>
-                    <select name="method" id="method" class="button-22">
-                        <option value="per-capita">Per capita (tons by person)</option>
-                        <option value="">No</option>
+                    <label for="mass-method">Mass radius method:</label>
+                    <select name="mass-method" id="mass-method" class="button-22">
+                        <option value="total">Total by Country</option>
+                        <option value="per-capita">Per capita (tonnes by person)</option>
                     </select>
-
+                    
                     <label for="region">Region:</label>
                     <select name="region" id="region" class="button-22">
                         <option value="">All</option>
                         <option value="Australia and New Zealand">Australia and New Zealand</option>
-                        <option value="Western Europe">Western Europe</option>
-                        <option value="Northern Europe">Northern Europe</option>
-                        <option value="Southern Europe">Southern Europe</option>
-                        <option value="Western Asia">Western Asia</option>
-                        <option value="Southern Asia">Southern Asia</option>
+                        <option value="Eastern Asia">Eastern Asia</option>
+                        <option value="Eastern Europe">Eastern Europe</option>
                         <option value="Latin America and the Caribbean">Latin America and the Caribbean</option>
                         <option value="Northern America">Northern America</option>
-                        <option value="Eastern Asia">Eastern Asia</option>
-                        <option value="Sub-Saharan Africa">Sub-Saharan Africa</option>
-                        <option value="Eastern Europe">Eastern Europe</option>
+                        <option value="Northern Europe">Northern Europe</option>
+                        <option value="Western Asia">Western Asia</option>
+                        <option value="Western Europe">Western Europe</option>
+                        <option value="Southern Asia">Southern Asia</option>
                         <option value="South-eastern Asia">South-eastern Asia</option>
+                        <option value="Southern Europe">Southern Europe</option>
+                        <option value="Sub-Saharan Africa">Sub-Saharan Africa</option>                        
                     </select>
 
                     <button class="button-22" role="button" onclick="redraw()">Redraw</button>

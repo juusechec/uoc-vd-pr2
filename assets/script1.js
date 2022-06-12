@@ -41,6 +41,11 @@ function filterDataWithOptions() {
     data = data.filter(d => d['Retail'] == 1);
   }
 
+  var region = d3.select("#region").node().value;
+  if (region !== "") {
+    data = data.filter(d => d['Region'] == region);
+  }
+
   return data;
 }
 
@@ -62,27 +67,51 @@ function getNodesAndClusters(data) {
 
   var clusterArray = [];
   var nodes = [];
+
+  var massMethod = d3.select("#mass-method").node().value;
+  var massFieldColumn = "";
+  if (massMethod === "total") {
+    massFieldColumn = " Standardised_Mass_tonnes/year ";
+  } else if (massMethod === "per-capita") {
+    massFieldColumn = "Normalised_Mass_Estimate";
+  }
+
+  var maxMassTonnes = 0;
+  for (var i = 0; i < data.length; i++) {
+    var mass = data[i][massFieldColumn].replaceAll(",", "");
+    mass = Number(mass);
+    if (mass > maxMassTonnes) {
+      maxMassTonnes = mass;
+    }
+  }
+
   for (var i = 0; i < data.length; i++) {
     // console.log(data[i].Name);
     if (clusterArray.indexOf(data[i].Region) < 0) {
       clusterArray.push(data[i].Region);
     }
 
-    var mass = data[i][" Standardised_Mass_tonnes/year "].replaceAll(",", "");
+    var mass = data[i][massFieldColumn].replaceAll(",", "");
     mass = Number(mass);
+    console.log('mass_before', mass);
+
+    var maxRadiusSize;
+    var minRadiusSize;
     var log = d3.select("#log").node().value;
     if (log == "Yes") {
-      mass = Math.log(mass + 100) / Math.log(22937138 + 100);
+      mass = Math.log(mass + 1) / Math.log(maxMassTonnes);
+      maxRadiusSize = 50;
+      minRadiusSize = 5;
     } else {
-      console.log('mass', mass);
-      mass = (mass / 22937138);
-      console.log('mass2', mass);
+      mass = (mass + 1) / maxMassTonnes;
+      maxRadiusSize = 100;
+      minRadiusSize = 5;
     }
-    var maxRadiusSize = 50;
+    console.log('mass_after', mass);
     var rad = mass * maxRadiusSize;
-    // console.log('rad', rad);
-    var minRadiusSize = 5;
-    if (isNaN(rad) || rad < 2) rad = minRadiusSize;
+    console.log('rad', rad);
+
+    if (isNaN(rad) || rad < minRadiusSize) rad = minRadiusSize;
 
     var Sectoral_Information = "";
     if (data[i].Household == 1) {
@@ -93,6 +122,16 @@ function getNodesAndClusters(data) {
       Sectoral_Information = "Retail";
     }
 
+    var Standardised_Mass_tonnes_year = "No disponible";
+    if (data[i][" Standardised_Mass_tonnes/year "].trim() !== "") {
+      Standardised_Mass_tonnes_year = data[i][" Standardised_Mass_tonnes/year "];
+    }
+
+    var Normalised_Mass_Estimate = "No disponible";
+    if (data[i]["Normalised_Mass_Estimate"].trim() !== "") {
+      Normalised_Mass_Estimate = data[i]["Normalised_Mass_Estimate"];
+    }
+
     var icluster = clusterArray.indexOf(data[i].Region);
     var node = {
       __index: i,
@@ -100,7 +139,8 @@ function getNodesAndClusters(data) {
       radius: rad,
       Country: data[i].Country,
       Region: data[i].Region,
-      Standardised_Mass_tonnes_year: data[i][" Standardised_Mass_tonnes/year "],
+      Standardised_Mass_tonnes_year: Standardised_Mass_tonnes_year,
+      Normalised_Mass_Estimate: Normalised_Mass_Estimate,
       Year: data[i]["Year(s)_covered"],
       Sectoral_Information: Sectoral_Information,
     };
@@ -145,16 +185,17 @@ function drawCluster(nodes, clusters) {
       .html(`Region ${d.cluster}: ${d.Region}<br>` +
         `Country: ${d.Country}<br>` +
         `Tonnes / year: ${d.Standardised_Mass_tonnes_year}<br>` +
+        `kg / capita / year: ${d.Normalised_Mass_Estimate}<br>` +
         `Sectoral Information: ${d.Sectoral_Information}<br>` +
         `Year: ${d.Year}`)
-      .style("left", (d3.mouse(this)[0] + 30) + "px")
-      .style("top", (d3.mouse(this)[1] + 100) + "px")
+      .style("left", (d3.mouse(this)[0] + 210) + "px")
+      .style("top", (d3.mouse(this)[1] + 50) + "px")
   }
   var moveTooltip = function (d) {
     tooltip
       .style("display", "block")
-      .style("left", (d3.mouse(this)[0] + 30) + "px")
-      .style("top", (d3.mouse(this)[1] + 100) + "px")
+      .style("left", (d3.mouse(this)[0] + 210) + "px")
+      .style("top", (d3.mouse(this)[1] + 50) + "px")
   }
   var hideTooltip = function (d) {
     tooltip
