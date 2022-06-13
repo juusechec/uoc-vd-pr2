@@ -53,7 +53,7 @@ d3.csv("Composition of Household Solid Waste.csv").then(function (data) {
     },
     'Total': {
       'image': 'Total.svg',
-      'color': '#B3B3B3',
+      'color': '#555555',
     },
   };
 
@@ -81,6 +81,8 @@ d3.csv("Composition of Household Solid Waste.csv").then(function (data) {
   var svg = d3.select("#food-waste-col")
     .attr("width", width)
     .attr("height", height);
+
+  addLegend();
 
   // var valuesToShow = [1];
   var offsetXBigCircle = width / 2;
@@ -240,10 +242,11 @@ d3.csv("Composition of Household Solid Waste.csv").then(function (data) {
 
     // Add legend: circles
     // https://medium.com/code-kings/adding-legend-to-d3-chart-b06f2ae8667
-    var valuesToShow = Object.keys(regionColor).filter(d => d !== '');
-    var offsetY = 100;
-    var offsetXCircle = 40;
-    var offsetXLabel = 60;
+    var valuesToShow = Object.keys(categoryList).filter(d => d !== 'Total');
+    valuesToShow.reverse();
+    var offsetY = 60;
+    var offsetXCircle = 10;
+    var offsetXLabel = 30;
     svg
       .selectAll("legend")
       .data(valuesToShow)
@@ -252,9 +255,10 @@ d3.csv("Composition of Household Solid Waste.csv").then(function (data) {
       .attr("cx", offsetXCircle)
       .attr("cy", function (d, i) { return (height - offsetY) - (i * 20) })
       .attr("r", function (d) { return 9 })
-      .style("fill", d => regionColor[d])
-      .attr("stroke", "black").attr("fill-opacity", .8)
-      .attr("fill-opacity", .8)
+      .style("fill", d => categoryList[d].color)
+      // .attr("stroke", "black")
+      // .attr("fill-opacity", .8)
+      // .attr("fill-opacity", 1)
 
     // Add legend: labels
     svg
