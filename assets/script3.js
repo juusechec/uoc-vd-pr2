@@ -208,7 +208,8 @@ d3.csv("Composition of Household Solid Waste.csv").then(function (data) {
       .attr("xlink:href", (d) => `assets/svg/${d.image}`);
 
     var text = g.append('text')
-      .attr("fill", "#f5ea4c")
+      .attr("fill", "#FFFFFF")
+      .attr("font-weight", "bolder")
       .attr("dx", function (d) {
         const w = this.getBoundingClientRect().x;
         // console.log('text w', this.getBoundingClientRect());
