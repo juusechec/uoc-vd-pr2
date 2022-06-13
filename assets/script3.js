@@ -65,7 +65,7 @@ d3.csv("Composition of Household Solid Waste.csv").then(function (data) {
     if (row['Sub-category'] === 'Total') continue;
     const node = {};
     const area = Number(row.Global);
-    node.radius = Math.sqrt(area/3.1416) * 43;
+    node.radius = Math.sqrt(area / 3.1416) * 43;
     node.text = row['Category'] + ': ' + row['Sub-category'];
     node.image = categoryList[row['Category']].image;
     node.color = categoryList[row['Category']].color;
@@ -117,7 +117,7 @@ d3.csv("Composition of Household Solid Waste.csv").then(function (data) {
       .duration(200)
     tooltip
       .style("opacity", 1)
-      .html(`Percentage: ${d.value}<br>Categoria -> ${d.text}`)
+      .html(`Percentage: ${d.value}%<br>Categoria -> ${d.text}`)
       .style("left", (event.x) / 2 + 300 + "px")
       .style("top", (event.y) / 2 + 1800 + "px")
   }
@@ -231,6 +231,42 @@ d3.csv("Composition of Household Solid Waste.csv").then(function (data) {
             .text(t)
         }
       })
+  }
+
+  function addLegend() {
+    // --------------- //
+    // ADD LEGEND //
+    // --------------- //
+
+    // Add legend: circles
+    // https://medium.com/code-kings/adding-legend-to-d3-chart-b06f2ae8667
+    var valuesToShow = Object.keys(regionColor).filter(d => d !== '');
+    var offsetY = 100;
+    var offsetXCircle = 40;
+    var offsetXLabel = 60;
+    svg
+      .selectAll("legend")
+      .data(valuesToShow)
+      .enter()
+      .append("circle")
+      .attr("cx", offsetXCircle)
+      .attr("cy", function (d, i) { return (height - offsetY) - (i * 20) })
+      .attr("r", function (d) { return 9 })
+      .style("fill", d => regionColor[d])
+      .attr("stroke", "black").attr("fill-opacity", .8)
+      .attr("fill-opacity", .8)
+
+    // Add legend: labels
+    svg
+      .selectAll("legend")
+      .data(valuesToShow)
+      .enter()
+      .append("text")
+      .attr('x', offsetXLabel)
+      .attr('y', function (d, i) { return (height - (offsetY - 6)) - (i * 20) })
+      .text(function (d) { return d })
+      .style("font-size", 10)
+      .attr('alignment-baseline', 'middle')
   }
 
 });
