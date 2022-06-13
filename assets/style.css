@@ -131,7 +131,7 @@ strong {
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
-  max-width: 100px;
+  max-width: 140px;
 }
 
 .button-22:active {
