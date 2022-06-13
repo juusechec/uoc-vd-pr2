@@ -37,7 +37,7 @@
   }
 
   window.updateMapDraw = function () {
-    console.log("recargar");
+    // console.log("recargar");
 
     let maxRadius = 0;
     const data = locationsData;
@@ -161,7 +161,7 @@
       .append("circle")
       .attr("cx", offsetXCircle)
       .attr("cy", function (d, i) { return (height - offsetY) - (i * 20) })
-      .attr("r", function (d) { return 5 })
+      .attr("r", function (d) { return 9 })
       .style("fill", d => regionColor[d])
       .attr("stroke", "black")
 
@@ -185,7 +185,7 @@
       .enter()
       .append("text")
       .attr('x', offsetXLabel)
-      .attr('y', function (d, i) { return (height - (offsetY - 5)) - (i * 20) })
+      .attr('y', function (d, i) { return (height - (offsetY - 6)) - (i * 20) })
       .text(function (d) { return d })
       .style("font-size", 10)
       .attr('alignment-baseline', 'middle')

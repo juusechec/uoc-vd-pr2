@@ -75,7 +75,11 @@ strong {
   display: flex;
   justify-content: center;
 }
-
+.tooltip2 {
+  position: absolute;
+  z-index: 1070;
+  display: block;
+}
 .tooltip {
   position: absolute;
   z-index: 1070;

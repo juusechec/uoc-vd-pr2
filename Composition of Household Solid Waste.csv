@@ -1,0 +1,45 @@
+"Category","Sub-category","Socioeconomic Status 1","Socioeconomic Status 2","Socioeconomic Status 3","Socioeconomic Status 4","Socioeconomic Status 5","Socioeconomic Status 6","Global"
+"Food","Total",61.42,62.43,59.44,60.58,53.79,55.31,60.56
+"Food","Prepared",6.33,8.68,9.56,7.82,4.96,7.85,8.56
+"Food","Not prepared",55.09,53.75,49.88,52.76,48.83,47.46,52
+"Gardening",,0.53,0.43,0.81,1.82,1.57,5.15,0.87
+"Paper and cardboard",,4.97,4.48,8.16,10.12,17.93,8.65,7.1
+"Plastics","Total",11.57,10.35,10.65,9.81,9.56,9.74,10.45
+"Plastics","Polyethylene",6.86,6.56,6.02,5.48,5.34,5.6,6.2
+"Plastics","Polycarbonate",0.17,0.03,0.04,0.02,0.01,0.03,0.04
+"Plastics","Rigid Polystyrene",0.29,0.31,0.37,0.31,0.45,0.44,0.34
+"Plastics","Polyvinyl chloride",0.09,0.03,0.04,0.02,0,0.03,0.04
+"Plastics","Transparent PET",1.21,0.96,1.76,1.36,1.22,1.06,1.33
+"Plastics","Amber PET",0.09,0.09,0.07,0.18,0.05,0.06,0.09
+"Plastics","Green PET",0.03,0.08,0.06,0.06,0.23,0.18,0.07
+"Plastics","Rigid Polypropylene",0.26,0.31,0.28,0.33,0.43,0.65,0.31
+"Plastics","High-density polyethylene",0.93,0.71,0.65,0.67,0.9,0.38,0.7
+"Plastics","Flexible polypropylene",1.17,0.81,0.95,0.69,0.56,0.85,0.87
+"Plastics","Polystyrene foam",0.23,0.25,0.29,0.51,0.35,0.45,0.3
+"Plastics","Others",0.24,0.21,0.12,0.18,0.02,0.01,0.16
+"Rubber and Leather",,1.33,0.42,0.24,0.51,0.13,0.12,0.42
+"Textiles",,2.79,2.07,1.88,1.09,1.19,0.53,1.89
+"Wood",,0.47,0.52,0.14,0.23,0.05,0.1,0.32
+"Metallic products","Total",0.81,0.68,0.84,1.2,1.62,0.95,0.85
+"Metallic products","Ferrous",0.58,0.57,0.73,0.91,0.54,0.69,0.67
+"Metallic products","Aluminum",0.22,0.1,0.1,0.25,0.26,0.26,0.14
+"Metallic products","Lead",0.01,0,0.01,0.03,0.3,0,0.02
+"Metallic products","Copper",0,0.01,0,0,0.46,0,0.02
+"Metallic products","Others",0,0,0,0.01,0.06,0,0
+"Glass","Total",1.38,1.46,1.7,4.38,4.21,7.11,2.08
+"Glass","Amber",0.12,0.05,0.12,1.19,0.22,0.66,0.22
+"Glass","Transparent",0.55,1.17,1.32,2.57,2.86,4.47,1.46
+"Glass","Green and colors",0.71,0.24,0.26,0.62,1.13,1.98,0.4
+"Ceramic-based, ash, others",,0.76,1.68,1.14,0.36,0.23,0.93,1.19
+"Household hazardous waste","Total",12.89,14.51,12.75,9.6,9.57,11.01,12.94
+"Household hazardous waste","Seals for car maintenance",0,0.01,0,0,0,0,0
+"Household hazardous waste","Household maintenance and cleaning products",0.31,0.19,0.34,0.33,0.48,0.21,0.28
+"Household hazardous waste","Biocides (gardening products)",0,0.01,0,0.07,0,0.03,0.01
+"Household hazardous waste","Medicines",0.19,0.17,0.2,0.33,0.33,0.23,0.21
+"Household hazardous waste","Hygiene and sanitary products",11.35,13.39,11.33,8.15,7.77,9.75,11.62
+"Household hazardous waste","Beauty and personal care products",0.49,0.28,0.56,0.34,0.68,0.32,0.42
+"Household hazardous waste","Batteries.electric and electronic",0.15,0.21,0.24,0.15,0.06,0.14,0.2
+"Household hazardous waste","Light bulbs",0.07,0.06,0.02,0.16,0.01,0.17,0.06
+"Household hazardous waste","Other hazardous products",0.33,0.19,0.06,0.07,0.24,0.16,0.14
+"Other waste not included on this list",,1.08,0.94,2.23,0.3,0.1,0.4,1.32
+"Total",,100,99.97,99.98,100,99.95,100,99.99
