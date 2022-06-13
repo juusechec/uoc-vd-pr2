@@ -3,6 +3,9 @@
 python3 -m http.server 9000
 ```
 
+# Publicación
+- https://juusechec.github.io/uoc-vd-pr2/
+
 # Datasets
 - https://docs.google.com/spreadsheets/d/1Dy8S-rn5kgZUFr1v1pfXSQuplrZhsFUax25YerqGk10/edit#gid=1935830857
 - https://www.unep.org/resources/report/unep-food-waste-index-report-2021
