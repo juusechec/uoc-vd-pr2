@@ -79,15 +79,26 @@ d3.csv("Composition of Household Solid Waste.csv").then(function (data) {
   console.log('d3.version', d3.version)
 
   var svg = d3.select("#food-waste-col")
+    .attr("viewBox", [0, 0, width, height])
     .attr("width", width)
     .attr("height", height);
+  var gsvg = svg.append("g");
+
+  svg.call(d3.zoom()
+    .extent([[0, 0], [width, height]])
+    .scaleExtent([1, 8])
+    .on("zoom", zoomed));
+
+  function zoomed({ transform }) {
+    gsvg.attr("transform", transform);
+  }
 
   addLegend();
 
   // var valuesToShow = [1];
   var offsetXBigCircle = width / 2;
   var offsetYBigCircle = height / 2;
-  svg
+  gsvg
     // .selectAll("bigCircle")
     // .data(valuesToShow)
     // .enter()
@@ -152,7 +163,7 @@ d3.csv("Composition of Household Solid Waste.csv").then(function (data) {
     .velocityDecay(0.6);
 
   function ticked() {
-    var u = svg
+    var u = gsvg
       .selectAll('circle[data-type="inside"]')
       .data(nodes)
       .join('circle')
@@ -182,11 +193,11 @@ d3.csv("Composition of Household Solid Waste.csv").then(function (data) {
     const circles = svg
       .selectAll('circle[data-type="inside"]');
 
-    svg.selectAll("g").remove();
+    gsvg.selectAll("g").remove();
 
     const circleNodes = circles.nodes();
 
-    const g = svg
+    const g = gsvg
       .selectAll("myG")
       .data(nodes)
       .enter()
@@ -247,7 +258,7 @@ d3.csv("Composition of Household Solid Waste.csv").then(function (data) {
     var offsetY = 60;
     var offsetXCircle = 10;
     var offsetXLabel = 30;
-    svg
+    gsvg
       .selectAll("legend")
       .data(valuesToShow)
       .enter()
@@ -256,12 +267,12 @@ d3.csv("Composition of Household Solid Waste.csv").then(function (data) {
       .attr("cy", function (d, i) { return (height - offsetY) - (i * 20) })
       .attr("r", function (d) { return 9 })
       .style("fill", d => categoryList[d].color)
-      // .attr("stroke", "black")
-      // .attr("fill-opacity", .8)
-      // .attr("fill-opacity", 1)
+    // .attr("stroke", "black")
+    // .attr("fill-opacity", .8)
+    // .attr("fill-opacity", 1)
 
     // Add legend: labels
-    svg
+    gsvg
       .selectAll("legend")
       .data(valuesToShow)
       .enter()
