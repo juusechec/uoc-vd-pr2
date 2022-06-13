@@ -1,10 +1,12 @@
+// https://bl.ocks.org/mbostock/7881887
+
 // var n = 200, // total number of circles
 //   m = 10; // number of distinct clusters
 // var maxRadius = 12; // 
 // // The largest node for each cluster.
 // var clusters = new Array(m);
 
-// var nodesClusters = d3.range(n).map(function () {
+// var nodesClusters = d3v3.range(n).map(function () {
 //   var i = Math.floor(Math.random() * m),
 //     r = Math.sqrt((i + 1) / m * -Math.log(Math.random())) * maxRadius,
 //     d = { cluster: i, radius: r };
@@ -15,24 +17,22 @@
 // console.log('nodesClusters', nodesClusters);
 // console.log('clusters', clusters);
 
-var originalData;
-
-function redraw() {
-  d3.select("#food-waste").selectAll("circle").remove();
+function redrawBubbles() {
+  d3v3.select("#food-waste-bubbles").selectAll("circle").remove();
   var data = filterDataWithOptions();
   var { nodes, clusters } = getNodesAndClusters(data);
   drawCluster(nodes, clusters);
 }
 
 function filterDataWithOptions() {
-  var data = originalData;
+  var data = window.originalData;
 
-  var year = d3.select("#year").node().value;
+  var year = d3v3.select("#year").node().value;
   if (year !== "") {
     data = data.filter(d => d['Year(s)_covered'] == year);
   }
 
-  var sectoral_information = d3.select("#sectoral_information").node().value;
+  var sectoral_information = d3v3.select("#sectoral_information").node().value;
   if (sectoral_information === "Household") {
     data = data.filter(d => d['Household'] == 1);
   } else if (sectoral_information === "Food_Service") {
@@ -41,7 +41,7 @@ function filterDataWithOptions() {
     data = data.filter(d => d['Retail'] == 1);
   }
 
-  var region = d3.select("#region").node().value;
+  var region = d3v3.select("#region").node().value;
   if (region !== "") {
     data = data.filter(d => d['Region'] == region);
   }
@@ -49,15 +49,15 @@ function filterDataWithOptions() {
   return data;
 }
 
-d3.csv("FWD_database.csv", function (data) {
-  originalData = data;
+d3v3.csv("FWD_database.csv", function (data) {
+  window.originalData = data;
   // console.log("data", data);
   // var data = data.slice(1, 10);
   var data = filterDataWithOptions();
 
   var { nodes, clusters } = getNodesAndClusters(data);
-  console.log('clusters', clusters);
-  console.log('nodes', nodes);
+  // console.log('clusters', clusters);
+  // console.log('nodes', nodes);
   drawCluster(nodes, clusters);
 });
 
@@ -68,7 +68,7 @@ function getNodesAndClusters(data) {
   var clusterArray = [];
   var nodes = [];
 
-  var massMethod = d3.select("#mass-method").node().value;
+  var massMethod = d3v3.select("#mass-method").node().value;
   var massFieldColumn = "";
   if (massMethod === "total") {
     massFieldColumn = " Standardised_Mass_tonnes/year ";
@@ -93,11 +93,11 @@ function getNodesAndClusters(data) {
 
     var mass = data[i][massFieldColumn].replaceAll(",", "");
     mass = Number(mass);
-    console.log('mass_before', mass);
+    // console.log('mass_before', mass);
 
     var maxRadiusSize;
     var minRadiusSize;
-    var log = d3.select("#log").node().value;
+    var log = d3v3.select("#log").node().value;
     if (log == "Yes") {
       mass = Math.log(mass + 1) / Math.log(maxMassTonnes);
       maxRadiusSize = 50;
@@ -107,9 +107,9 @@ function getNodesAndClusters(data) {
       maxRadiusSize = 100;
       minRadiusSize = 5;
     }
-    console.log('mass_after', mass);
+    // console.log('mass_after', mass);
     var rad = mass * maxRadiusSize;
-    console.log('rad', rad);
+    // console.log('rad', rad);
 
     if (isNaN(rad) || rad < minRadiusSize) rad = minRadiusSize;
 
@@ -127,9 +127,13 @@ function getNodesAndClusters(data) {
       Standardised_Mass_tonnes_year = data[i][" Standardised_Mass_tonnes/year "];
     }
 
+    // var Normalised_Mass_Estimate = "No disponible";
+    // if (data[i]["Normalised_Mass_Estimate"].trim() !== "") {
+    //   Normalised_Mass_Estimate = data[i]["Normalised_Mass_Estimate"];
+    // }
     var Normalised_Mass_Estimate = "No disponible";
-    if (data[i]["Normalised_Mass_Estimate"].trim() !== "") {
-      Normalised_Mass_Estimate = data[i]["Normalised_Mass_Estimate"];
+    if (data[i]["Final_kg/cap/yr_estimate"].trim() !== "") {
+      Normalised_Mass_Estimate = data[i]["Final_kg/cap/yr_estimate"];
     }
 
     var icluster = clusterArray.indexOf(data[i].Region);
@@ -188,14 +192,14 @@ function drawCluster(nodes, clusters) {
         `kg / capita / year: ${d.Normalised_Mass_Estimate}<br>` +
         `Sectoral Information: ${d.Sectoral_Information}<br>` +
         `Year: ${d.Year}`)
-      .style("left", (d3.mouse(this)[0] + 210) + "px")
-      .style("top", (d3.mouse(this)[1] + 50) + "px")
+      .style("left", (d3v3.mouse(this)[0] + 210) + "px")
+      .style("top", (d3v3.mouse(this)[1] + 50) + "px")
   }
   var moveTooltip = function (d) {
     tooltip
       .style("display", "block")
-      .style("left", (d3.mouse(this)[0] + 210) + "px")
-      .style("top", (d3.mouse(this)[1] + 50) + "px")
+      .style("left", (d3v3.mouse(this)[0] + 210) + "px")
+      .style("top", (d3v3.mouse(this)[1] + 50) + "px")
   }
   var hideTooltip = function (d) {
     tooltip
@@ -204,16 +208,16 @@ function drawCluster(nodes, clusters) {
       .style("display", "none")
   }
 
-  var color = d3.scale.category10()
-    .domain(d3.range(m));
+  var color = d3v3.scale.category10()
+    .domain(d3v3.range(m));
 
-  var svg = d3.select("#food-waste")
+  var svg = d3v3.select("#food-waste-bubbles")
     .style("background-color", "#455ca8");
 
   var width = +svg[0][0].getAttribute("width");
   var height = +svg[0][0].getAttribute("height");
 
-  var force = d3.layout.force()
+  var force = d3v3.layout.force()
     .nodes(nodes)
     .size([width, height])
     .gravity(0)
@@ -221,7 +225,7 @@ function drawCluster(nodes, clusters) {
     .on("tick", tick)
     .start();
 
-  var tooltip = d3.select("#tooltip")
+  var tooltip = d3v3.select("#tooltip")
     .style("display", "none")
     .attr("class", "tooltip")
     .style("background-color", "black")
@@ -277,7 +281,7 @@ function drawCluster(nodes, clusters) {
 
   // Resolves collisions between d and all other circles.
   function collide(alpha) {
-    var quadtree = d3.geom.quadtree(nodes);
+    var quadtree = d3v3.geom.quadtree(nodes);
     return function (d) {
       var r = d.radius + maxRadius + Math.max(padding, clusterPadding),
         nx1 = d.x - r,
