@@ -98,7 +98,7 @@
       .style("stroke", "black")
       // .attr("stroke", function (d) { if (d.n > 2000) { return "black" } else { return "none" } })
       .attr("stroke-width", 1)
-      .attr("fill-opacity", .5)
+      .attr("fill-opacity", .8)
   }
 
   var locationsData;
@@ -163,7 +163,8 @@
       .attr("cy", function (d, i) { return (height - offsetY) - (i * 20) })
       .attr("r", function (d) { return 9 })
       .style("fill", d => regionColor[d])
-      .attr("stroke", "black")
+      .attr("stroke", "black").attr("fill-opacity", .8)
+      .attr("fill-opacity", .8)
 
     // Add legend: segments
     // svg
