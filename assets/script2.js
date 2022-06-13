@@ -151,6 +151,7 @@
     // Add legend: circles
     // https://medium.com/code-kings/adding-legend-to-d3-chart-b06f2ae8667
     var valuesToShow = Object.keys(regionColor).filter(d => d !== '');
+    valuesToShow.reverse();
     var offsetY = 100;
     var offsetXCircle = 40;
     var offsetXLabel = 60;

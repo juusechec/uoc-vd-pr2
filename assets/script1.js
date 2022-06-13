@@ -264,6 +264,7 @@ function drawCluster(nodes, clusters) {
   // Add legend: circles
   // https://medium.com/code-kings/adding-legend-to-d3-chart-b06f2ae8667
   var valuesToShow = Object.keys(regionColor).filter(d => d !== '');
+  valuesToShow.reverse();
   var offsetY = 100;
   var offsetXCircle = 40;
   var offsetXLabel = 60;
@@ -276,7 +277,7 @@ function drawCluster(nodes, clusters) {
     .attr("cy", function (d, i) { return (height - offsetY) - (i * 20) })
     .attr("r", function (d) { return 9 })
     .style("fill", d => regionColor[d])
-    .attr("stroke", "black")
+    // .attr("stroke", "black")
 
   // Add legend: labels
   svg
