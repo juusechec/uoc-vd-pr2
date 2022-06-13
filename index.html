@@ -16,7 +16,17 @@
     <link rel="stylesheet" href="assets/style.css">
 
     <script src="//d3js.org/d3.v3.min.js"></script>
+    <script>
+        window.d3v3 = window.d3;
+        window.d3 = undefined;
+    </script>
 
+    <script src="//d3js.org/d3.v4.min.js"></script>
+    <script>
+        window.d3v4 = window.d3;
+    </script>
+    <script src="//d3js.org/d3-geo-projection.v2.min.js"></script>
+    <script src="//d3js.org/d3-scale-chromatic.v1.min.js"></script>
 </head>
 
 <body>
@@ -33,10 +43,11 @@
         <section role="main" id="primary" class="site-main">
             <div class="page">
                 <div class="section">
-                    <h1>Food Waste per Country Yearly</h1>
+                    <h1>Food Waste in the World</h1>
                 </div>
                 <div class="section-separator"></div>
-                <div class="section">
+                <div class="section" style="display: none;">
+                    <h1><strong>Food Waste</strong> per Country Yearly</h1><br>
                     <label for="year">Year:</label>
                     <select name="year" id="year" class="button-22">
                         <option value="">All</option>
@@ -77,7 +88,7 @@
                         <option value="total">Total by Country</option>
                         <option value="per-capita">Per capita (tonnes by person)</option>
                     </select>
-                    
+
                     <label for="region">Region:</label>
                     <select name="region" id="region" class="button-22">
                         <option value="">All</option>
@@ -92,15 +103,40 @@
                         <option value="Southern Asia">Southern Asia</option>
                         <option value="South-eastern Asia">South-eastern Asia</option>
                         <option value="Southern Europe">Southern Europe</option>
-                        <option value="Sub-Saharan Africa">Sub-Saharan Africa</option>                        
+                        <option value="Sub-Saharan Africa">Sub-Saharan Africa</option>
                     </select>
 
-                    <button class="button-22" role="button" onclick="redraw()">Redraw</button>
+                    <button class="button-22" role="button" onclick="redrawBubbles()">Redraw</button>
 
                     <div class="container-center">
-                        <svg id="food-waste" width="1024" height="500"></svg>
+                        <svg id="food-waste-bubbles" width="1024" height="500"></svg>
                         <div id="tooltip"></div>
                     </div>
+                </div>
+                <div class="section-separator"></div>
+                <div class="section">
+                    <h1>Latest <strong>Food Waste</strong> of The World</h1><br>
+                    <label for="sectoral_information2">Sectoral Information:</label>
+                    <select name="sectoral_information2" id="sectoral_information2" class="button-22" onchange="updateMapDraw()">
+                        <option value="">All</option>
+                        <option value="Household">Household</option>
+                        <option value="Food_Service">Food_Service</option>
+                        <option value="Retail">Retail</option>
+                    </select>
+
+                    <label for="data-method2">Data for Radius:</label>
+                    <select name="data-method2" id="data-method2" class="button-22" onchange="updateMapDraw()">
+                        <option value="total">Food Waste by Country</option>
+                        <option value="per-capita">Food Waste per capita</option>
+                    </select>
+
+                    <div class="container-center">
+                        <svg id="food-waste-map"></svg>
+                    </div>
+                </div>
+                <div class="section-separator"></div>
+                <div class="section">
+                    <h1><strong>Food Waste</strong> in Colombia</h1><br>
                 </div>
             </div>
             <div class="iib-page-viz iib-single-viz iib-single-viz--no-title">
@@ -132,7 +168,7 @@
         </footer>
     </div>
     <script src="assets/script1.js"></script>
-    <!-- <script src="assets/script2.js"></script> -->
+    <script src="assets/script2.js"></script>
 </body>
 
 </html>
