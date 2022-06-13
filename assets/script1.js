@@ -63,7 +63,7 @@ d3v3.csv("FWD_database.csv", function (data) {
 
 function getNodesAndClusters(data) {
   var width = 1024;
-  var height = 500;
+  var height = 600;
 
   var clusterArray = [];
   var nodes = [];
@@ -208,8 +208,21 @@ function drawCluster(nodes, clusters) {
       .style("display", "none")
   }
 
-  var color = d3v3.scale.category10()
-    .domain(d3v3.range(m));
+  const regionColor = {
+    'Australia and New Zealand': '#7F3C8D',
+    'Western Europe': '#11A579',
+    'Northern Europe': '#3969AC',
+    'Southern Europe': '#F2B701',
+    'Western Asia': '#E73F74',
+    'Southern Asia': '#80BA5A',
+    'Latin America and the Caribbean': '#E68310',
+    'Northern America': '#008695',
+    'Eastern Asia': '#CF1C90',
+    'Sub-Saharan Africa': '#f97b72',
+    'Eastern Europe': '#4b4b8f',
+    'South-eastern Asia': '#A5AA99',
+    '': '#FFFF00',
+  }
 
   var svg = d3v3.select("#food-waste-bubbles")
     .style("background-color", "#455ca8");
@@ -233,15 +246,49 @@ function drawCluster(nodes, clusters) {
     .style("padding", "10px")
     .style("color", "white");
 
-  var circle = svg.selectAll("circle")
+  var circle = svg.selectAll("circle[data-type='bubble']")
     .data(nodes)
     .enter().append("circle")
+    .attr('data-type', 'bubble')
     .attr("r", function (d) { return d.radius; })
-    .style("fill", function (d) { return color(d.cluster); })
+    .style("fill", (d) => regionColor[d.Region])
     .on("mouseover", showTooltip)
     .on("mousemove", moveTooltip)
     .on("mouseleave", hideTooltip)
     .call(force.drag);
+
+  // --------------- //
+  // ADD LEGEND //
+  // --------------- //
+
+  // Add legend: circles
+  // https://medium.com/code-kings/adding-legend-to-d3-chart-b06f2ae8667
+  var valuesToShow = Object.keys(regionColor).filter(d => d !== '');
+  var offsetY = 100;
+  var offsetXCircle = 40;
+  var offsetXLabel = 60;
+  svg
+    .selectAll("legend")
+    .data(valuesToShow)
+    .enter()
+    .append("circle")
+    .attr("cx", offsetXCircle)
+    .attr("cy", function (d, i) { return (height - offsetY) - (i * 20) })
+    .attr("r", function (d) { return 9 })
+    .style("fill", d => regionColor[d])
+    .attr("stroke", "black")
+
+  // Add legend: labels
+  svg
+    .selectAll("legend")
+    .data(valuesToShow)
+    .enter()
+    .append("text")
+    .attr('x', offsetXLabel)
+    .attr('y', function (d, i) { return (height - (offsetY - 6)) - (i * 20) })
+    .text(function (d) { return d })
+    .style("font-size", 10)
+    .attr('alignment-baseline', 'middle')
 
   function tick(e) {
     circle
